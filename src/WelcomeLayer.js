@@ -50,12 +50,15 @@ var MyGameScene = cc.Scene.extend({
 
         var spriteFrameCache = cc.SpriteFrameCache.getInstance();
         spriteFrameCache.addSpriteFrames("res/baseResource.plist","res/baseResource.png");
+        spriteFrameCache.addSpriteFrames("res/many.plist","res/many.png");
 
         var layer = new WelcomeLayer;
         this.addChild(layer);
 
         gSharedEngine.setMusicVolume(1);
-        gSharedEngine.setEffectsVolume(0.1);
-        gSharedEngine.playMusic(MUSIC_BACKGROUND,true);
+        gSharedEngine.setEffectsVolume(0.1);/*
+        gSharedEngine.playMusic(MUSIC_BACKGROUND_1,false);
+        gSharedEngine.playMusic(MUSIC_BACKGROUND_2,false);
+        gSharedEngine.playMusic(MUSIC_BACKGROUND_3,false);*/
     }
 });

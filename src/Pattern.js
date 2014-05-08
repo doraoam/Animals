@@ -28,37 +28,10 @@ var PatternSprite = cc.Sprite.extend({
         var bRet = false;
         if (this._super()) {
             this.m_eExtraAttr = extraAttr;
-            if(extraAttr == ePatternExtraAttr.Stone)
-                this.m_ePatternType = -1;
-            else
-                this.m_ePatternType = type;
-            if (this.m_ePatternType==-1 || extraAttr==ePatternExtraAttr.Freeze)
-                this.m_bSwapEnable = false;
-            else
-                this.m_bSwapEnable = true;
+            this.m_ePatternType = type;
 
-            switch (this.m_eExtraAttr)
-            {
-                case ePatternExtraAttr.Bomb:
-                {
-                    this.m_extraTypeSpr = cc.Sprite.createWithSpriteFrameName("pattern_mark_explode.png");
-                    break;
-                }
-                case ePatternExtraAttr.Freeze:
-                {
-                    this.m_extraTypeSpr = cc.Sprite.createWithSpriteFrameName("pattern_mark_freeze.png");
-                    break;
-                }
-                default:
-                    break;
-            }
-
-            if (this.m_eExtraAttr == ePatternExtraAttr.Stone)
-                this.initWithSpriteFrameName("pattern_mark_petrifaction.png");
-            else  {
-                var str = "cocos"+("00"+ type).slice(-2)+".png";
-                this.initWithSpriteFrameName(str);
-            }
+            var str = "miny"+("00"+ type).slice(-2)+".png";
+            this.initWithSpriteFrameName(str);
 
             if (this.m_extraTypeSpr != null){
                 var size = this.getContentSize();
@@ -79,7 +52,6 @@ var PatternSprite = cc.Sprite.extend({
         effectSprite.runAction(cc.Animate.create(animation));
 
         this.runAction(cc.FadeOut.create(0.5));
-        gSharedEngine.playEffect(EFFECT_PATTERN_CLEAR);
     },
     explodePattern:function(frams){
         this.g_ePatternStatus = ePatternStatus.Explode;
@@ -90,7 +62,6 @@ var PatternSprite = cc.Sprite.extend({
         effectSprite.runAction(cc.Animate.create(animation));
 
         this.runAction(cc.FadeOut.create(0.5));
-        gSharedEngine.playEffect(EFFECT_PATTERN_BOMB);
     },
     removeFreeze:function(){
         if (this.m_eExtraAttr == ePatternExtraAttr.Freeze)

@@ -64,6 +64,7 @@ var PatternMatrix = cc.Layer.extend({
 
             this.mPatternBatchNode = cc.SpriteBatchNode.create("res/baseResource.png",MATRIX_ROW_MAX*MATRIX_COL_MAX*2);
             this.addChild(this.mPatternBatchNode,1);
+            this.addChild(cc.SpriteBatchNode.create("res/many.png",MATRIX_ROW_MAX*MATRIX_COL_MAX*2),1)
 
             this.mCheckMarkSpr = cc.Sprite.createWithSpriteFrameName("pattern_selected.png");
             this.mCheckMarkSpr.setPosition(-100.0,-100.0);
@@ -373,7 +374,6 @@ var PatternMatrix = cc.Layer.extend({
                 this.clearSomePatterns(matrixMark);
             else{
                 this.swapTwoPattern(pfPattern,psPattern,true);
-                gSharedEngine.playEffect(EFFECT_PATTERN_UN_SWAP);
             }
         }
     },
@@ -581,7 +581,6 @@ var PatternMatrix = cc.Layer.extend({
             return;
         this.mPatternClearTally += patternTally;
         this.mGameScore += patternTally*this.mScoreMultiple;
-        this.mTimeTotal++;
         this.mScoreLabel.setString("Score "+this.mGameScore);
     },
     updateProgress:function(){
@@ -639,11 +638,6 @@ var PatternMatrix = cc.Layer.extend({
         resultLayer.initResultData(this.mGameScore,this.mPatternRequire*100*3,gScoreData.bestScore,isPass);
         this.onExit();
         gScoreData.setLastScore(this.mGameScore);
-
-        if(isPass)
-            gSharedEngine.playEffect(EFFECT_GAME_WIN);
-        else
-           gSharedEngine.playEffect(EFFECT_GAME_FAIL);
 
         cc.Director.getInstance().getRunningScene().addChild(resultLayer,99);
     } ,
