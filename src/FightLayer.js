@@ -1,4 +1,13 @@
-var WelcomeLayer = cc.Layer.extend({
+/**
+ * Created with IntelliJ IDEA.
+ * User: doraoam
+ * Date: 9/5/2557
+ * Time: 1:10 น.
+ * To change this template use File | Settings | File Templates.
+ */
+var FightLayer = cc.Layer.extend({
+
+    mWordLabel:null,
 
     ctor:function () {
         this._super();
@@ -11,9 +20,11 @@ var WelcomeLayer = cc.Layer.extend({
             bgSprite.setPosition(350,340);
             this.addChild(bgSprite);
 
-            var logoSprite = cc.Sprite.create("res/logo.png");
-            logoSprite.setPosition(355,320);
-            this.addChild(logoSprite);
+            var foeSprite = cc.Sprite.create("res/mony.png");
+            foeSprite.setPosition(355,320);
+            this.addChild(foeSprite);
+
+            this.initLabels();
 
             var itemStartGame = cc.MenuItemImage.create(
                 "res/btn/btnStartGameNor.png",
@@ -31,34 +42,30 @@ var WelcomeLayer = cc.Layer.extend({
         }
         return bRet;
     },
+
+    initLabels:function(){
+        this.mWordLabel = cc.LabelTTF.create("Hi! I'm mony. Can you defeat me?");
+        this.mWordLabel.setPosition(350,590);
+
+        this.addChild(this.mWordLabel);
+    },
+
     menuCallBack:function(sender){
         gSharedEngine.playEffect(EFFECT_BUTTON_CHICK);
         //gGameMode = eGameMode.Challenge;
         gGameMode = eGameMode.Timer;
         var nextScene = cc.Scene.create();
-        var nextLayer = new FightLayer;
+        var nextLayer = new PatternMatrix;
         nextScene.addChild(nextLayer);
         cc.Director.getInstance().replaceScene(cc.TransitionSlideInT.create(0.4, nextScene));
     }
 });
 
-var MyGameScene = cc.Scene.extend({
+var UnoScene = cc.Scene.extend({
     onEnter:function () {
         this._super();
 
-        gScoreData.initData();
-
-        var spriteFrameCache = cc.SpriteFrameCache.getInstance();
-        spriteFrameCache.addSpriteFrames("res/baseResource.plist","res/baseResource.png");
-        spriteFrameCache.addSpriteFrames("res/many.plist","res/many.png");
-
-        var layer = new WelcomeLayer;
+        var layer = new FightLayer;
         this.addChild(layer);
-
-        gSharedEngine.setMusicVolume(1);
-        gSharedEngine.setEffectsVolume(0.1);/*
-        gSharedEngine.playMusic(MUSIC_BACKGROUND_1,false);
-        gSharedEngine.playMusic(MUSIC_BACKGROUND_2,false);
-        gSharedEngine.playMusic(MUSIC_BACKGROUND_3,false);*/
     }
 });

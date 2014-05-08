@@ -38,7 +38,7 @@
         engineDir:'../../../cocos2d/',
         //SingleEngineFile:'',
         appFiles:['src/CCNotificationCenter.js','src/WelcomeLayer.js','src/GameData.js',
-            'src/Pattern.js', 'src/PatternMatrix.js','src/ResultLayer.js']
+            'src/Pattern.js', 'src/PatternMatrix.js','src/ResultLayer.js','src/FightLayer.js']
     };
 
     if(!d.createElement('canvas').getContext){
